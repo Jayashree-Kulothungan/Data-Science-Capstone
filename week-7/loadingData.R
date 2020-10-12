@@ -1,14 +1,3 @@
-# importing required packages
-library(dplyr)
-library(ggplot2)
-library(stringi)
-library(tm)
-library(RWeka)
-library(wordcloud)
-library(ngram)
-library(R.utils)
-library(tidyr)
-
 # importing data from text files
 conn <- file("en_US.blogs.txt")
 blogs_data <- readLines(conn, encoding="UTF-8", skipNul=TRUE)
@@ -24,3 +13,40 @@ file <- file("en_US.twitter.txt")
 twitter_data <- readLines(conn, encoding="UTF-8", skipNul=TRUE)
 twitter_data <- data.frame(twitter_data)
 close(conn)
+
+##Basic Summary of data
+
+#"en_US.blogs.txt"
+
+head(blogs_data)
+Lines <- length(blogs_data) 
+Size <- gsub(' ',' ' , object.size(blogs_data))
+wordCount <- wordcount(blogs_data, sep=" ", count.function = sum)
+data <- data.frame(FileName = "en_US.blogs.txt" , 
+                   FileSize = Size,
+                   WordCount = wordCount,
+                   Lines = Lines)
+
+data
+
+#"en_US.news.txt"
+head(news_data)
+Lines <- length(news_data) 
+Size <- gsub(' ',' ' , object.size(news_data))
+wordCount <- wordcount(news_data, sep=" ", count.function = sum)
+data <- data.frame(FileName = "en_US.news.txt" , 
+                   FileSize = Size,
+                   WordCount = wordCount,
+                   Lines = Lines)
+data
+
+#"en_US.twitter.txt"
+head(twitter_data)
+Lines <- length(twitter_data) 
+Size <- gsub(' ',' ' , object.size(twitter_data))
+wordCount <- wordcount(twitter_data, sep=" ", count.function = sum)
+data <- data.frame(FileName = "en_US.blogs.txt" , 
+                   FileSize = Size,
+                   WordCount = wordCount,
+                   Lines = Lines)
+data
