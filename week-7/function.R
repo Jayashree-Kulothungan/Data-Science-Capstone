@@ -84,5 +84,5 @@ ngrams <- function(input){
         return(out)
 }
 
-input <- "at the end"
+input <- "at the end" #give any text to check
 ngrams(input)
