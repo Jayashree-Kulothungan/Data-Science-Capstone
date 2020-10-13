@@ -10,25 +10,6 @@ library(ngram)
 library(R.utils)
 library(tidyr)
 
-# create data samples
-set.seed(12345)
-
-test_data <- c(sample(blogs_data ,length(blogs_data) * 0.005),
-               sample(news_data, length(news_data) * 0.005),
-               sample(twitter_data, length(twitter_data) * 0.005)
-)
-# clean sample data
-
-testdata <- iconv(test_data, "UTF-8", "ASCII", sub="")
-
-sample_corpus <- VCorpus(VectorSource(testdata))
-sample_corpus <- tm_map(sample_corpus, tolower)
-sample_corpus <- tm_map(sample_corpus, stripWhitespace)
-sample_corpus <- tm_map(sample_corpus, removePunctuation)
-sample_corpus <- tm_map(sample_corpus, removeNumbers)
-sample_corpus <- tm_map(sample_corpus, PlainTextDocument)
-
-
 #create ngrams
 
 unigram <- function(x) NGramTokenizer(x, Weka_control(min=1, max=1))
