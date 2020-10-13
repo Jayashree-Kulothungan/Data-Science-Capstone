@@ -1,3 +1,14 @@
+# importing required packages
+library(dplyr)
+library(stringi)
+library(tm)
+library(RWeka)
+library(wordcloud)
+library(ngram)
+library(R.utils)
+library(tidyr)
+
+
 # importing data from text files
 conn <- file("en_US.blogs.txt")
 blogs_data <- readLines(conn, encoding="UTF-8", skipNul=TRUE)
@@ -50,3 +61,22 @@ data <- data.frame(FileName = "en_US.blogs.txt" ,
                    WordCount = wordCount,
                    Lines = Lines)
 data
+
+# create data samples
+set.seed(12345)
+
+test_data <- c(sample(blogs_data ,length(blogs_data) * 0.005),
+               sample(news_data, length(news_data) * 0.005),
+               sample(twitter_data, length(twitter_data) * 0.005)
+)
+# clean sample data
+
+testdata <- iconv(test_data, "UTF-8", "ASCII", sub="")
+
+sample_corpus <- VCorpus(VectorSource(testdata))
+sample_corpus <- tm_map(sample_corpus, tolower)
+sample_corpus <- tm_map(sample_corpus, stripWhitespace)
+sample_corpus <- tm_map(sample_corpus, removePunctuation)
+sample_corpus <- tm_map(sample_corpus, removeNumbers)
+sample_corpus <- tm_map(sample_corpus, PlainTextDocument)
+
