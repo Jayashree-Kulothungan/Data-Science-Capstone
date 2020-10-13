@@ -5,13 +5,13 @@ library(ngram)
 library(tidyr)
 library(shiny)
 
-source("function.R")
+source("function.r")
 
 ui <- fluidPage(
         
         # Application title
-        titlePanel("Prediction Model"),
-        p("This app is designed to predict the next word"),
+        titlePanel("Text Prediction Model"),
+        p("This app that takes an input phrase (multiple words) in a text box and outputs a prediction of the next word."),
         
         # Sidebar with a slider input for number of bins 
         sidebarLayout(
@@ -38,8 +38,8 @@ ui <- fluidPage(
                                          br(),
                                          h3('1. Enter ont to 3 words in the box below'),
                                          h3('2. The predicted next Word will be printed below'),
-                                         h3('3. If a word cannot be predicted usually because of spelling errors, ? will be printed')
-                                         ),
+                                         h3('3. If a word cannot be predicted usually because of spelling errors, ? will be printed'),
+                                ),
                                 
                                 tabPanel("Source Code",
                                          br(), 
@@ -53,14 +53,15 @@ ui <- fluidPage(
                                          br(),
                                          a("5. Prediction Model", href="https://github.com/Jayashree-Kulothungan/Data-Science-Capstone/blob/main/week-7/function.R"),
                                          br(),
-                                         a("6. ShinyApp" , href = "")
-                                         a("5. ")
+                                         a("6. ShinyApp" , href = "https://github.com/Jayashree-Kulothungan/Data-Science-Capstone/blob/main/week-7/shinyApp.R"),
+                                         
                                 ),
                                 
-                                
-                                tabPanel("top bigrams",
+                                tabPanel("Data",
                                          br(),
-                                         img(src = "bi_words.png", height = 500, width = 700))
+                                         h5("Data were downloaded from following link"),
+                                         a("Data source", href="https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip"),
+                                         )
                         )   
                 )
         )
